@@ -15,6 +15,6 @@ BEGIN
                 INSERT INTO Enrollment (Semester, IdStudy, StartDate) VALUES (@Semester, @idStudy, GETDATE());
                 SET @idEnrollment = (SELECT IdEnrollment FROM Enrollment WHERE Semester = (@Semester + 1) AND IdStudy = @idStudy);
             END
-        UPDATE Student SET IdEnrollment = @idEnrollment WHERE IdEnrollment = (SELECT IdEnrollment FROM Enrollment WHERE Semester = @Semester AND IdStudy = @idStudy);
-END;
-SELECT * FROM Enrollment WHERE IdEnrollment = @idEnrollment;
+    UPDATE Student SET IdEnrollment = @idEnrollment WHERE IdEnrollment = (SELECT IdEnrollment FROM Enrollment WHERE Semester = @Semester AND IdStudy = @idStudy);
+    END;
+    SELECT * FROM Enrollment WHERE IdEnrollment = @idEnrollment;
