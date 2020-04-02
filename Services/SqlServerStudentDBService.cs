@@ -26,6 +26,7 @@ namespace APBD05.Services
                 com.Connection = con;
                 con.Open();
                 var tran = con.BeginTransaction();
+                com.Transaction = tran;
                 var enrollment = new Enrollment();
 
                 try
