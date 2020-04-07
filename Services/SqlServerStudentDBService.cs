@@ -1,6 +1,7 @@
 ﻿using APBD05.DTOs.Requests;
 using APBD05.DTOs.Responses;
 using APBD05.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace APBD05.Services
 {
-    class SqlServerStudentDBService : IStudentDBService
+    public class SqlServerStudentDBService : IStudentDBService
     {
         public Enrollment EnrollStudent(EnrollStudentRequest student)
         {
@@ -26,7 +27,6 @@ namespace APBD05.Services
                 com.Connection = con;
                 con.Open();
                 var tran = con.BeginTransaction();
-                com.Transaction = tran;
                 var enrollment = new Enrollment();
 
                 try
@@ -37,7 +37,7 @@ namespace APBD05.Services
                     var dr = com.ExecuteReader();
                     if (!dr.Read())
                     {
-                        //return BadRequest(400);
+                        //return BadRequest();
                     }
 
                     var studies = new EnrollStudiesResponse();
@@ -86,7 +86,7 @@ namespace APBD05.Services
 
                     if (dr.Read())
                     {
-                        //return BadRequest(400);
+                        //return BadRequest();
                     }
 
                     com.CommandText = "INSERT INTO Student(IndexNumber, FirstName, LastName, BirthDate, IdEnrollment) VALUES (@index, @fname, @lname, @birthDate, @idEnrollment";
@@ -139,6 +139,26 @@ namespace APBD05.Services
 
             }
             return enrollment;
+        }
+
+        public Boolean CheckIndex(string index)
+        {
+            using (var con = new SqlConnection("Data Source=db-mssql; Initial Catalog=s18989;Integrated Security=True"))
+            using (var com = new SqlCommand())
+            {
+                com.Connection = con;
+                con.Open();
+
+                com.CommandText = "SELECT 1 FROM Student WHERE IndexNumber = @index";
+                com.Parameters.AddWithValue("index", index);
+
+                var dr = com.ExecuteReader();
+                if (dr.Read())
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

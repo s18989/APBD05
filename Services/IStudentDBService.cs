@@ -12,5 +12,7 @@ namespace APBD05.Services
     {
         Enrollment EnrollStudent(EnrollStudentRequest student);
         Enrollment PromoteStudents(int semester, string studies);
+        bool CheckIndex(string index);
+
     }
 }

@@ -1,0 +1,30 @@
+GET
+/api/students
+Body jest puste
+Query jest puste
+
+GET
+/api/students
+Body jest puste
+Query jest puste
+
+GET
+/favicon.ico
+Body jest puste
+Query jest puste
+
+GET
+/api/students
+Body jest puste
+Query jest puste
+
+GET
+/api/students
+Body jest puste
+Query jest puste
+
+GET
+/api/students
+Body jest puste
+Query jest puste
+
